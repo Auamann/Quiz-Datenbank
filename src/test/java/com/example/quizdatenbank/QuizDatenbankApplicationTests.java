@@ -1,6 +1,6 @@
 package com.example.quizdatenbank;
 
-import com.example.quizdatenbank.Question.Questions;
+import com.example.quizdatenbank.Question.Question;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,24 +19,24 @@ class QuizDatenbankApplicationTests {
 
     @Test
     void integrationsTest() {
-        Questions question1 = new Questions("Frage 1", "Antwort 1");
-        Questions question2 = new Questions("Frage 2", "Antwort 2");
+        Question question1 = new Question("Frage 1", "Antwort 1");
+        Question question2 = new Question("Frage 2", "Antwort 2");
         question1.setApproved(true);
         question2.setApproved(true);
 
-        ResponseEntity<Questions[]> emptyResponse = restTemplate.getForEntity("/api/questions", Questions[].class);
+        ResponseEntity<Question[]> emptyResponse = restTemplate.getForEntity("/api/questions", Question[].class);
         assertThat(emptyResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(emptyResponse.getBody()).isEmpty();
 
-        ResponseEntity<Questions> postResponse = restTemplate.postForEntity("/api/questions", question1, Questions.class);
+        ResponseEntity<Question> postResponse = restTemplate.postForEntity("/api/questions", question1, Question.class);
         assertThat(postResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(postResponse.getBody().getFrage()).isEqualTo("Frage 1");
 
-        ResponseEntity<Questions> postResponse2 = restTemplate.postForEntity("/api/questions", question2, Questions.class);
+        ResponseEntity<Question> postResponse2 = restTemplate.postForEntity("/api/questions", question2, Question.class);
         assertThat(postResponse2.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(postResponse2.getBody().getFrage()).isEqualTo("Frage 2");
 
-        ResponseEntity<Questions[]> fullResponse = restTemplate.getForEntity("/api/questions", Questions[].class);
+        ResponseEntity<Question[]> fullResponse = restTemplate.getForEntity("/api/questions", Question[].class);
         assertThat(fullResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(fullResponse.getBody().length).isEqualTo(2);
 

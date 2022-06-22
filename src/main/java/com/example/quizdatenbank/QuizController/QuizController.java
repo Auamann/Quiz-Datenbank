@@ -1,6 +1,6 @@
 package com.example.quizdatenbank.QuizController;
 
-import com.example.quizdatenbank.Question.Questions;
+import com.example.quizdatenbank.Question.Question;
 import com.example.quizdatenbank.QuizService.QuizService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,22 +17,18 @@ public class QuizController {
 
     private final QuizService quizService;
 
-    @GetMapping("/Simon")
-    public String greetMe(@PathVariable String name) {
-        return "Moin " + name;
-    }
 
     @GetMapping
-    public List<Questions> getQuestions() {
+    public List<Question> getQuestions() {
         return quizService.getApprovedQuestions();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Questions> getQuestion(@PathVariable String id) {
+    public ResponseEntity<Question> getQuestion(@PathVariable String id) {
         return ResponseEntity.of(quizService.getQuestion(id));
     }
     @PostMapping
-    public Questions createQuestion(@RequestBody Questions question) {
+    public Question createQuestion(@RequestBody Question question) {
         return quizService.createQuestion(question);
     }
 }

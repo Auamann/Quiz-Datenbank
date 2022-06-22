@@ -1,7 +1,7 @@
 package com.example.quizdatenbank.QuizService;
 
 import com.example.quizdatenbank.Interfaces.QuizRepository;
-import com.example.quizdatenbank.Question.Questions;
+import com.example.quizdatenbank.Question.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,16 @@ public class QuizService {
 
     private final QuizRepository quizRepository;
 
-    public List<Questions> getApprovedQuestions() {
+    public List<Question> getApprovedQuestions() {
     return quizRepository.findAllByApproved(true);
 
     }
 
-    public Questions createQuestion(Questions question) {
+    public Question createQuestion(Question question) {
         return quizRepository.save(question);
     }
 
-    public Optional<Questions> getQuestion(String id) {
+    public Optional<Question> getQuestion(String id) {
         return quizRepository.findById(id);
     }
 }

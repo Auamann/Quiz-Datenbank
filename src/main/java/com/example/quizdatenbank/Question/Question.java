@@ -5,9 +5,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document
+@Document (collection = "questions")
 @Data
-public class Questions {
+public class Question {
 
     @Id
     private String id;
@@ -16,7 +16,7 @@ public class Questions {
     public String antwort;
     private boolean approved;
 
-    public Questions(String frage, String antwort) {
+    public Question(String frage, String antwort) {
         this.frage = frage;
         this.antwort = antwort;
     }
