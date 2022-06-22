@@ -17,6 +17,11 @@ public class QuizController {
 
     private final QuizService quizService;
 
+    @GetMapping("/Simon")
+    public String greetMe(@PathVariable String name) {
+        return "Moin " + name;
+    }
+
     @GetMapping
     public List<Questions> getQuestions() {
         return quizService.getApprovedQuestions();
